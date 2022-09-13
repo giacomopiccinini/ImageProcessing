@@ -8,6 +8,10 @@ Here I implemented a simple k-Nearest Neighbour algorithm in the case of masks u
 
 Given two masks, mask_1 and mask_2, for each point in mask_1 the algorithm returns the coordinates of the k elements of mask_2 which are closest to it, using a Manhattan distance. Crucially, this algorithm is optimised, as "for" loops are avoided and NumPy broadcasting preferred. 
 
+## MaskContour
+
+This algorithm retrieves the contour (boundary) of a ROI using jump in gradients. 
+
 ## EdgeDetection
 
 This algorithm is useful for detecting edges in images. It is definitely not my original work, but it is nonetheless useful to have it written down somewhere. Notice: the Gaussian blur pre-processing is a recommended step for removing noise and thus improving the overall efficiency. Thresholds for canny edge detection should be set depending on the case at hand. 
