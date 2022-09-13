@@ -27,6 +27,6 @@ def nn(mask_1, mask_2, k):
     nn_indices = ordered_distances[:, : k]
 
     # Retrieve actual coordinates
-    nn_coordinates = mask_points[nn_indices]
+    nn_coordinates = mask_2_coordinates[nn_indices]
 
     return nn_coordinates
