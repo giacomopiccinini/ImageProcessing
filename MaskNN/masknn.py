@@ -3,7 +3,7 @@ import numpy as np
 def nn(mask_1, mask_2, k):
 
     """ For each point in mask_1 the k nearest neighbour belonging to mask_2 are found. 
-    The metric used is Manhattan. """
+    The metric used is Manhattan."""
 
     # Extract coordinates of points of mask_1
     mask_1_coordinates = np.argwhere(mask_1)
@@ -30,3 +30,19 @@ def nn(mask_1, mask_2, k):
     nn_coordinates = mask_2_coordinates[nn_indices]
 
     return nn_coordinates
+
+
+
+def nn_value(image, mask_1, mask_2, k):
+
+    """ Retrieve alues of k nearest neighbours """
+
+    # Find NN coordinates
+    nn_coordinates = nn(mask_1, mask_2, k)
+
+    # Retrieve NN values (syntax is convoluted)
+    nn_values = image[tuple(nn_coordinates.T.tolist())].T 
+
+    return nn_values
+
+
