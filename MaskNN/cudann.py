@@ -1,4 +1,4 @@
-import numpy as np
+import cupy as cp
 
 def nn(mask_1, mask_2, k):
 
@@ -6,22 +6,22 @@ def nn(mask_1, mask_2, k):
     The metric used is Manhattan."""
 
     # Extract coordinates of points of mask_1
-    mask_1_coordinates = np.argwhere(mask_1)
+    mask_1_coordinates = cp.argwhere(mask_1)
     
     # Extract coordinates of points of mask_2
-    mask_2_coordinates = np.argwhere(mask_2)
+    mask_2_coordinates = cp.argwhere(mask_2)
 
     # Compute differences along x and y
     difference = mask_1_coordinates[:, None] - mask_2_coordinates
 
     # Compute the moduli of difference along each direction
-    moduli = np.abs(difference)
+    moduli = cp.abs(difference)
 
     # Sum moduli to obtain the actual Manhattan metric
-    metrics = np.sum(moduli, axis = 2)
+    metrics = cp.sum(moduli, axis = 2)
 
     # Sort points by distance
-    ordered_distances = np.sort(metrics, axis = 1)
+    ordered_distances = cp.sort(metrics, axis = 1)
 
     # Keep only the first k neighbours and obtain indices of their coordinates
     nn_indices = ordered_distances[:, : k]
