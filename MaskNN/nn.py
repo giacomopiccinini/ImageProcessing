@@ -35,6 +35,28 @@ def nn(mask_1: np.ndarray, mask_2: np.ndarray, k: int) -> np.ndarray:
     return nn_coordinates
 
 
+def nn_mask(mask_1: np.ndarray, mask_2: np.ndarray, k: int) -> np.ndarray:
+
+    """For each point in mask_1 the k nearest neighbour belonging to mask_2 are found.
+    The output is a numpy array of the same shape as mask_1 and mask_2 but with only nearest neighbours (in mask_2)
+    to each and every point of mask_1 are set to 1.
+    The metric used is Manhattan."""
+
+    # Retrieve coordinates
+    nn_coordinates = nn(mask_1, mask_2, k)
+
+    # Reshape coordinates list
+    nn_coordinates = nn_coordinates.reshape(-1, 2)
+
+    # Create blank mask
+    mask = np.zeros_like(mask_1)
+
+    # Fill in blank mask
+    mask[tuple(zip(*nn_coordinates))] = 1
+
+    return mask
+
+
 def nn_value(
     image: np.ndarray, mask_1: np.ndarray, mask_2: np.ndarray, k: int
 ) -> np.ndarray:
