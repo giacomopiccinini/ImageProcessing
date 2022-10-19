@@ -21,7 +21,7 @@ def nn(mask_1, mask_2, k):
     metrics = np.sum(moduli, axis = 2)
 
     # Sort points by distance
-    ordered_distances = np.sort(metrics, axis = 1)
+    ordered_distances = np.argsort(metrics, axis = 1)
 
     # Keep only the first k neighbours and obtain indices of their coordinates
     nn_indices = ordered_distances[:, : k]
